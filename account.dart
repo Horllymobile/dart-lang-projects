@@ -9,7 +9,7 @@ class Account {
     return account_number;
   }
 
-  set debosit(double amount) {
+  void debosit(double amount) {
     if (amount >= 1) {
       this.account_balance += amount;
     } else {
@@ -42,7 +42,7 @@ void main() {
   print(
       "${account1.account_name}-${account1.account_number} you account balance is ${account1.account_balance}");
   try {
-    account1.debosit = 6000;
+    account1.debosit(6000);
   } on AccountException catch (e) {
     print(e.message);
   }
@@ -56,7 +56,7 @@ void main() {
   print(
       "${account1.account_name}-${account1.account_number} you account balance is ${account1.account_balance}");
   try {
-    account1.debosit = -1;
+    account1.debosit(-1);
   } on AccountException catch (e) {
     print(e.message);
   }
