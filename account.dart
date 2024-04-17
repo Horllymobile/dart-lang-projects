@@ -10,30 +10,18 @@ class Account {
   }
 
   set debosit(double amount) {
-    try {
-      if (amount >= 1) {
-        this.account_balance += amount;
-      } else {
-        throw AccountException('Invalid amount');
-      }
-    } on AccountException catch (e) {
-      print(e);
-    } catch (e) {
-      print(e);
+    if (amount >= 1) {
+      this.account_balance += amount;
+    } else {
+      throw AccountException('Invalid amount');
     }
   }
 
   void withdraw(double amount) {
-    try {
-      if (amount <= this.account_balance) {
-        this.account_balance -= amount;
-      } else {
-        throw AccountException('Insuficient fund');
-      }
-    } on AccountException catch (e) {
-      print(e);
-    } catch (e) {
-      print(e);
+    if (amount <= this.account_balance) {
+      this.account_balance -= amount;
+    } else {
+      throw AccountException('Insuficient fund');
     }
   }
 }
@@ -53,16 +41,32 @@ void main() {
   var account1 = Account("Abraham James", "569", 0.0);
   print(
       "${account1.account_name}-${account1.account_number} you account balance is ${account1.account_balance}");
-  account1.debosit = 6000;
+  try {
+    account1.debosit = 6000;
+  } on AccountException catch (e) {
+    print(e.message);
+  }
   print(
       "${account1.account_name}-${account1.account_number} you account balance is ${account1.account_balance}");
-  account1.withdraw(600);
+  try {
+    account1.withdraw(600);
+  } on AccountException catch (e) {
+    print(e.message);
+  }
   print(
       "${account1.account_name}-${account1.account_number} you account balance is ${account1.account_balance}");
-  account1.debosit = -1;
+  try {
+    account1.debosit = -1;
+  } on AccountException catch (e) {
+    print(e.message);
+  }
   print(
       "${account1.account_name}-${account1.account_number} you account balance is ${account1.account_balance}");
-  account1.withdraw(7000);
+  try {
+    account1.withdraw(7000);
+  } on AccountException catch (e) {
+    print(e.message);
+  }
   print(
       "${account1.account_name}-${account1.account_number} you account balance is ${account1.account_balance}");
 }
